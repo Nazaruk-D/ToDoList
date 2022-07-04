@@ -19,24 +19,21 @@ type PropsType = {
 
 export function Todolist(props: PropsType) {
 
-    const onCLickButtonHandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        props.callBack()
+    const onCLickButtonHandler = () => props.callBack()
 
-    }
 
     const onChangeInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         props.setTitleInput(event.currentTarget.value)
     }
     const onKeyPressHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.keyCode === 13) {
+        if (event.key === "Enter") {
             props.callBack()
         }
     }
 
-    const onAllClickHandler = () => props.changeFilter("all")
-    const onActiveClickHandler = () => props.changeFilter("active")
-    const onCompletedClickHandler = () => props.changeFilter("completed")
+    const tsarChangeFilter = (value:FilterValuesType) => {props.changeFilter(value)}
 
+    const onClickHandler = (tID:string) => props.removeTask(tID)
 
     return <div>
         <h3>{props.title}</h3>
@@ -49,19 +46,19 @@ export function Todolist(props: PropsType) {
         <ul>
             {
                 props.tasks.map(t => {
-                    const onClickHandler = () => props.removeTask(t.id)
+                    // const onClickHandler = () => props.removeTask(t.id)
                     return <li key={t.id}>
                         <input type="checkbox" checked={t.isDone}/>
                         <span>{t.title}</span>
-                        <button onClick={onClickHandler}>x</button>
+                        <button onClick={()=>onClickHandler(t.id)}>x</button>
                     </li>
                 })
             }
         </ul>
         <div>
-            <button onClick={onAllClickHandler}>All</button>
-            <button onClick={onActiveClickHandler}>Active</button>
-            <button onClick={onCompletedClickHandler}>Completed</button>
+            <button onClick={()=>tsarChangeFilter("all")}>All</button>
+            <button onClick={()=>tsarChangeFilter("active")}>Active</button>
+            <button onClick={()=>tsarChangeFilter("completed")}>Completed</button>
         </div>
     </div>
 }
