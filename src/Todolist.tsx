@@ -15,12 +15,15 @@ type PropsType = {
     addTask: (title: string) => void
     changeTask: (id: string, isDone: boolean) => void
     filter: string
+    addCount: () => void
+    counter:number
 }
 
 export function Todolist(props: PropsType) {
 
     let [title, setTitle] = useState("")
     let [error, setError] = useState<string | null>(null)
+
 
     const addTask = () => {
         if (title.trim() !== "") {
@@ -45,7 +48,10 @@ export function Todolist(props: PropsType) {
     const onAllClickHandler = () => props.changeFilter("all");
     const onActiveClickHandler = () => props.changeFilter("active");
     const onCompletedClickHandler = () => props.changeFilter("completed");
-    const onChangeHandlerForCheckBox = (x:boolean, id: string) => {props.changeTask(id, x)}
+    const onChangeHandlerForCheckBox = (x: boolean, id: string) => props.changeTask(id, x)
+    const onClickAddCountHandler = () => props.addCount()
+
+
     return <div>
         <h3>{props.title}</h3>
         <div>
@@ -59,11 +65,10 @@ export function Todolist(props: PropsType) {
         <ul>
             {
                 props.tasks.map(t => {
-
                     const onClickHandler = () => props.removeTask(t.id)
-
                     return <li key={t.id} className={t.isDone ? "is-done" : ""}>
-                        <input type="checkbox" onChange={(e: ChangeEvent<HTMLInputElement>)=>onChangeHandlerForCheckBox(e.currentTarget.checked,t.id)}/>
+                        <input type="checkbox"
+                               onChange={(e: ChangeEvent<HTMLInputElement>) => onChangeHandlerForCheckBox(e.currentTarget.checked, t.id)}/>
                         <span>{t.title}</span>
                         <button onClick={onClickHandler}>x</button>
                     </li>
@@ -77,6 +82,10 @@ export function Todolist(props: PropsType) {
             <button className={props.filter === "completed" ? "active-filter" : ""}
                     onClick={onCompletedClickHandler}>Completed
             </button>
+            <div>
+                <button onClick={onClickAddCountHandler}>Добавляем + 1</button>
+                <span>{props.counter}</span>
+            </div>
         </div>
     </div>
 }

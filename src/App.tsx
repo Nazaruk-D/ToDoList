@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {KeyboardEvent, useState} from 'react';
 import './App.css';
 import {Todolist} from './Todolist';
 import {v1} from 'uuid';
@@ -6,6 +6,7 @@ import {v1} from 'uuid';
 export type FilterValuesType = "all" | "active" | "completed";
 
 function App() {
+
 
     let [tasks, setTasks] = useState([
         {id: v1(), title: "HTML&CSS", isDone: true},
@@ -24,6 +25,9 @@ function App() {
         let task = {id: v1(), title: title, isDone: false};
         let newTasks = [task, ...tasks];
         setTasks(newTasks);
+        counter++;
+        setCounter(counter);
+        console.log(counter)
     }
 
     let [filter, setFilter] = useState<FilterValuesType>("all");
@@ -31,7 +35,7 @@ function App() {
     let tasksForTodolist = tasks;
 
     if (filter === "active") {
-        tasksForTodolist = tasks.filter(t => !t.isDone );
+        tasksForTodolist = tasks.filter(t => !t.isDone);
     }
     if (filter === "completed") {
         tasksForTodolist = tasks.filter(t => t.isDone);
@@ -49,6 +53,13 @@ function App() {
         }
     }
 
+    let [counter, setCounter] = useState<number>(0)
+
+    function addCount() {
+        counter++;
+        setCounter(counter);
+    }
+
 
     return (
         <div className="App">
@@ -58,7 +69,9 @@ function App() {
                       changeFilter={changeFilter}
                       addTask={addTask}
                       changeTask={changeTask}
-                      filter={filter}/>
+                      filter={filter}
+                      addCount={addCount}
+                      counter={counter}/>
         </div>
     );
 }
