@@ -15,6 +15,7 @@ const theme = createTheme(
             },
             secondary: red,
             type: "light",
+
         },
     })
 

@@ -3,7 +3,7 @@ import './App.css';
 import {TaskType, Todolist} from './Todolist';
 import {v1} from 'uuid';
 import {AddItemForm} from './AddItemForm';
-import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
+import {AppBar, Box, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
 
 export type FilterValuesType = "all" | "active" | "completed";
@@ -134,28 +134,28 @@ function App() {
                 </Toolbar>
 
             </AppBar>
-            <Container >
+            <Container maxWidth={"lg"} >
+
                 <Grid container style={{padding: "20px 0"}} >
                     <AddItemForm addItem={addTodolist}/>
                 </Grid>
-                <Grid container spacing={5}>
-                    {
-                        todolists.map(tl => {
+
+                <Grid container spacing={4}>
+                    {todolists.map(tl => {
                             let allTodolistTasks = tasks[tl.id];
                             let tasksForTodolist = allTodolistTasks;
 
                             if (tl.filter === "active") {
-                                tasksForTodolist = allTodolistTasks.filter(t => t.isDone === false);
+                                tasksForTodolist = allTodolistTasks.filter(t => !t.isDone);
                             }
                             if (tl.filter === "completed") {
-                                tasksForTodolist = allTodolistTasks.filter(t => t.isDone === true);
+                                tasksForTodolist = allTodolistTasks.filter(t => t.isDone );
                             }
 
                             return (
-                                <Grid item key={tl.id}>
-                                    <Paper style={{padding: "20px"}} elevation={8}>
+                                <Grid item key={tl.id} xs={3} style={{height:"100%"}}>
+                                    <Paper style={{padding: "20px"}} elevation={8} >
                                         <Todolist
-
                                             id={tl.id}
                                             title={tl.title}
                                             tasks={tasksForTodolist}
@@ -173,10 +173,7 @@ function App() {
                         })
                     }
                 </Grid>
-
             </Container>
-
-
         </div>
     );
 }

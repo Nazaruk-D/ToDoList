@@ -41,6 +41,7 @@ export function AddItemForm(props: AddItemFormPropsType) {
             error={!!error}
             label={"Title"}
             helperText={!!error}
+            style = {{width: 196}}
         />
         <IconButton aria-label="delete" onClick={addItem}>
             <Add/>
@@ -49,3 +50,4 @@ export function AddItemForm(props: AddItemFormPropsType) {
         {error && <div className="error-message">{error}</div>}
     </div>
 }
+/*style={{width:"270px"}}*/

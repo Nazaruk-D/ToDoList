@@ -2,7 +2,7 @@ import React, {ChangeEvent} from 'react';
 import {FilterValuesType} from './App';
 import {AddItemForm} from './AddItemForm';
 import {EditableSpan} from './EditableSpan';
-import {Button, Checkbox, IconButton, List} from "@material-ui/core";
+import {Button, Checkbox, Container, Grid, IconButton, List} from "@material-ui/core";
 import {Delete, HighlightOff} from "@material-ui/icons";
 
 export type TaskType = {
@@ -42,7 +42,7 @@ export function Todolist(props: PropsType) {
     const onCompletedClickHandler = () => props.changeFilter("completed", props.id);
 
     return <div>
-        <h3><EditableSpan value={props.title} onChange={changeTodolistTitle}/>
+        <h3><EditableSpan value={props.title} onChange={changeTodolistTitle} />
             <IconButton aria-label="delete" onClick={removeTodolist}>
                 <Delete/>
             </IconButton>
@@ -67,10 +67,10 @@ export function Todolist(props: PropsType) {
                                   onChange={onChangeHandler}
                                   checked={t.isDone}/>
                         {/*<input type="checkbox" onChange={onChangeHandler} checked={t.isDone}/>*/}
-                        <EditableSpan value={t.title} onChange={onTitleChangeHandler}/>
-                        <IconButton aria-label="delete" onClick={onClickHandler}>
-                            <HighlightOff/>
-                        </IconButton>
+                            <EditableSpan value={t.title} onChange={onTitleChangeHandler}/>
+                            <IconButton aria-label="delete" onClick={onClickHandler}>
+                                <HighlightOff/>
+                            </IconButton>
                     </li>
                 })
             }
