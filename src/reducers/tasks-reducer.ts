@@ -1,7 +1,7 @@
-import {FilterValuesType, TasksStateType, TodolistType} from "../App";
-import {v1} from "uuid";
+import {TasksStateType} from "../App";
 import {TaskType} from "../Todolist";
 import {AddTodolistAT, RemoveTodolistAT} from "./todolists-reducer";
+import {v1} from "uuid";
 // Тип действия + необходимые данные для этого типа действия
 
 type RemoveTaskAT = ReturnType<typeof removeTaskAC>
