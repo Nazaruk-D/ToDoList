@@ -9,8 +9,6 @@ type PropsTaskType = {
     removeTask: (taskId: string) => void
     changeTaskStatus: (id: string, isDone: boolean) => void
     changeTaskTitle: (taskId: string, newTitle: string) => void
-
-
 }
 
 export const Task: FC<PropsTaskType> = React.memo(({task  , removeTask, changeTaskTitle, changeTaskStatus}) => {
