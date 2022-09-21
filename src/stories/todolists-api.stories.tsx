@@ -171,7 +171,7 @@ export const UpdateTask = () => {
 
     const [title, setTitle] = useState<string>('title 1')
     const [description, setDescription] = useState<string>('description 1')
-    const [completed, setCompleted] = useState<boolean>(false)
+    const [completed, setCompleted] = useState<number>(0)
     const [status, setStatus] = useState<number>(0)
     const [priority, setPriority] = useState<number>(0)
     const [startDate, setStartDate] = useState<string>('')
@@ -183,10 +183,13 @@ export const UpdateTask = () => {
             deadline: deadline,
             priority: priority,
             description: description,
-            completed: completed,
             title: title,
             status: status,
-            startDate: startDate
+            startDate: startDate,
+            order:0,
+            id: taskId,
+            addedDate:"",
+            todoListId: todolistId
         })
             .then((res) => {
                 setState(res.data)
