@@ -45,10 +45,10 @@ function App() {
         dispatch(addTaskTC(todolistId, title))
     },[dispatch])
     const changeTaskTitle = useCallback((id: string, newTitle: string, todolistId: string) => {
-        dispatch(updateTaskTC(id, {title: newTitle}, todolistId))
+        dispatch(updateTaskTC(todolistId, {title: newTitle}, id))
     }, [dispatch])
     const  changeStatus = useCallback((id: string, status: TaskStatus, todolistId: string) => {
-        dispatch(updateTaskTC(id, {status}, todolistId))
+        dispatch(updateTaskTC(todolistId, {status},  id))
     }, [dispatch])
 
     //todolist:

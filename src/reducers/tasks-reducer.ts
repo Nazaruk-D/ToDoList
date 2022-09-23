@@ -34,7 +34,7 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
 //AC
 export const removeTaskAC = (todolistId: string, taskId: string) => ({type: "REMOVE-TASK", taskId, todolistId} as const)
 export const addTaskAC = (task: TaskType) => ({type: "ADD-TASK", task} as const)
-export const updateTaskAC = (taskId: string, task: TaskType, todolistId: string) => ({type: "UPDATE-TASK", taskId, task, todolistId} as const)
+export const updateTaskAC = (todolistId: string , task: TaskType, taskId: string) => ({type: "UPDATE-TASK", taskId, task, todolistId} as const)
 export const setTasks = (todoId: string, tasks: TaskType[]) => ({type: "SET-TASKS", todoId, tasks} as const)
 
 
@@ -59,6 +59,7 @@ export const addTaskTC = (todoId: string, title: string) => (dispatch: Dispatch<
         })
 }
 export const updateTaskTC = (todoId: string, domainModel: UpdateTaskType, taskId: string): AppThunk => (dispatch, getState: () => AppRootStateType) => {
+    debugger
     const task = getState().tasks[todoId].find(el => el.id === taskId)
         if(!task) {
             console.warn("task not found in the state")
