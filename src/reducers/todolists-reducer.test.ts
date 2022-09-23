@@ -1,10 +1,8 @@
 import {v1} from "uuid";
 import {
     addTodolistAC,
-    changeTodolistFilterAC,
-    ChangeTodolistFilterAT,
-    changeTodolistTitleAC,
-    ChangeTodolistTitleAT,
+    changeTodolistFilterAC, ChangeTodolistFilterAT,
+    changeTodolistTitleAC, ChangeTodolistTitleAT,
     FilterValuesType,
     removeTodolistAC,
     TodolistDomainType,

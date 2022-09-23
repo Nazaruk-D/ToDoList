@@ -2,7 +2,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Button } from './Button';
-import {AddItemForm} from "../AddItemForm";
+import {AddItemForm} from "../components/AddItemForm";
 import {action} from "@storybook/addon-actions";
 import App from "../App";
 import {Provider} from "react-redux";
