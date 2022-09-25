@@ -5,7 +5,7 @@ import {Dispatch} from "redux";
 import {AppRootStateType, AppThunk} from "./store";
 
 
-export const tasksReducer = (state: TasksStateType = initialState, action: ActionType): TasksStateType => {
+export const tasksReducer = (state: TasksStateType = initialState, action: TasksActionType): TasksStateType => {
     switch (action.type) {
         case "REMOVE-TASK":
             return {...state, [action.todolistId]: state[action.todolistId].filter(task => task.id !== action.taskId)}
@@ -52,7 +52,7 @@ export const deleteTaskTC = (todoId: string, taskId: string): AppThunk => (dispa
             dispatch(removeTaskAC(todoId, taskId))
         })
 }
-export const addTaskTC = (todoId: string, title: string) => (dispatch: Dispatch<ActionType>) => {
+export const addTaskTC = (todoId: string, title: string): AppThunk => (dispatch ) => {
     taskAPI.createTask(todoId, title)
         .then((res) => {
             dispatch(addTaskAC(res.data.data.item))
@@ -79,7 +79,7 @@ export const updateTaskTC = (todoId: string, domainModel: UpdateTaskType, taskId
 //types
 const initialState: TasksStateType = {};
 
-type ActionType =
+export type TasksActionType =
     ReturnType<typeof removeTaskAC>
     | ReturnType<typeof addTaskAC>
     | ReturnType<typeof updateTaskAC>
