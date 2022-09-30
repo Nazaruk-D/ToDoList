@@ -2,7 +2,17 @@ import React, {useCallback, useEffect} from 'react';
 import './App.css';
 import {Todolist} from './Todolist';
 import {AddItemForm} from './components/AddItemForm';
-import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
+import {
+    AppBar,
+    Button,
+    Container,
+    Grid,
+    IconButton,
+    LinearProgress,
+    Paper,
+    Toolbar,
+    Typography
+} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
 import {
     addTodolistTC,
@@ -17,6 +27,8 @@ import {addTaskTC, deleteTaskTC, updateTaskTC} from "./reducers/tasks-reducer";
 import {useSelector} from "react-redux";
 import {AppRootStateType, useAppDispatch} from "./reducers/store";
 import {TaskStatus, TaskType} from "./api/todolist-api";
+import {RequestStatusType} from "./reducers/app-reducer";
+import {ErrorSnackbar} from "./components/ErrorSnackbar/ErrorSnackbar";
 
 
 export type TasksStateType = {
@@ -25,7 +37,7 @@ export type TasksStateType = {
 
 
 function App() {
-
+    const status = useSelector<AppRootStateType, RequestStatusType>( store => store.app.status)
     let todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
     let tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
 
@@ -69,6 +81,7 @@ function App() {
 
     return (
         <div className="App">
+            <ErrorSnackbar/>
             <AppBar position="static">
                 <Toolbar style={{justifyContent: "space-between"}}>
                     <IconButton edge="start" color="inherit" aria-label="menu">
@@ -79,10 +92,9 @@ function App() {
                     </Typography>
                     <Button color="inherit" variant={"outlined"}>Logout</Button>
                 </Toolbar>
-
+                {status === "loading" &&  <LinearProgress color="secondary"/>}
             </AppBar>
             <Container maxWidth={"lg"} >
-
                 <Grid container style={{padding: "20px 0"}} >
                     <AddItemForm addItem={addTodolist}/>
                 </Grid>
@@ -105,6 +117,7 @@ function App() {
                                             removeTodolist={removeTodolist}
                                             changeTaskTitle={changeTaskTitle}
                                             changeTodolistTitle={changeTodolistTitle}
+                                            entityStatus={tl.entityStatus}
                                         />
                                     </Paper>
                                 </Grid>)

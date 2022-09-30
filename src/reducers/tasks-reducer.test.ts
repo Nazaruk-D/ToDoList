@@ -88,7 +88,7 @@ beforeEach(() => {
 
 test('correct task should be deleted from correct array', () => {
 
-    const action = removeTaskAC("2", "todolistId2");
+    const action = removeTaskAC("todolistId2", "2");
 
     const endState = tasksReducer(startState, action)
 
@@ -192,8 +192,8 @@ test('status of specified task should be changed', () => {
 
     const task: TaskType = {
         id: "2",
-        title: "CSS",
-        status: TaskStatus.New,
+        title: "milk",
+        status: TaskStatus.Completed,
         todoListId: "todolistId2",
         startDate: "",
         deadline: "",
@@ -202,7 +202,9 @@ test('status of specified task should be changed', () => {
         priority: TaskPriority.Low,
         description: ""
     }
-    const action = updateTaskAC("2", {...task, status: TaskStatus.New}, "todolistId2");
+
+
+    const action = updateTaskAC( "todolistId2", {...task, status: TaskStatus.New},"2");
     const endState = tasksReducer(startState, action)
 
     expect(endState["todolistId1"][1].status).toBe(TaskStatus.Completed);
@@ -224,7 +226,7 @@ test('status of specified task should be changed', () => {
         priority: TaskPriority.Low,
         description: ""
     }
-    const action = updateTaskAC("2", {...task, title: "Coca"}, "todolistId2");
+    const action = updateTaskAC("todolistId2" , {...task, title: "Coca"}, "2");
     const endState = tasksReducer(startState, action)
 
     expect(endState["todolistId2"][1].title).toBe("Coca");
@@ -234,7 +236,10 @@ test('status of specified task should be changed', () => {
 
 test('new array should be added when new todolist is added', () => {
 
-    const action = addTodolistAC("new todolist");
+    let newTodolist = {
+        id: "3", title: "new todolist", filter: "all", addedDate:"", order:0, entityStatus: "idle"
+    }
+    const action = addTodolistAC(newTodolist);
     const endState = tasksReducer(startState, action)
 
 

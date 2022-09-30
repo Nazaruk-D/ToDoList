@@ -19,8 +19,8 @@ beforeEach(()=>{
     todolistId2 = v1();
 
     startState = [
-        {id: todolistId1, title: "What to learn", filter: "all", addedDate:"", order:0},
-        {id: todolistId2, title: "What to buy", filter: "all", addedDate:"", order:0}
+        {id: todolistId1, title: "What to learn", filter: "all", addedDate:"", order:0, entityStatus: "idle"},
+        {id: todolistId2, title: "What to buy", filter: "all", addedDate:"", order:0, entityStatus: "idle"}
     ]
 })
 
@@ -37,10 +37,12 @@ test('correct todolist should be removed', () => {
 
 
 test('correct todolist should be added', () => {
+    let newTodolistTitle = "Hey"
+    let newTodolist = {
+        id: todolistId1, title: newTodolistTitle, filter: "all", addedDate:"", order:0, entityStatus: "idle"
+    }
 
-    let newTodolistTitle = "New Todolist";
-
-    const endState = todolistsreducer(startState, addTodolistAC(newTodolistTitle))
+    const endState = todolistsreducer(startState, addTodolistAC(newTodolist))
     expect(endState.length).toBe(3);
     expect(endState[0].title).toBe(newTodolistTitle);
 
@@ -67,12 +69,6 @@ test('correct filter of todolist should be changed', () => {
 test('correct todolist should change its name', () => {
 
     let newTodolistTitle = "New Todolist";
-
-    const action: ChangeTodolistTitleAT = {
-        type: "CHANGE-TODOLIST-TITLE",
-        title: newTodolistTitle,
-        id: todolistId2
-    };
 
     const endState = todolistsreducer(startState, changeTodolistTitleAC(newTodolistTitle, todolistId2));
     expect(endState[0].title).toBe("What to learn");
