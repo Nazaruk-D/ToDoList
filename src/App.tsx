@@ -10,11 +10,9 @@ import {ErrorSnackbar} from "./components/ErrorSnackbar/ErrorSnackbar";
 import {logoutTC} from "./features/Login/auth-reducer";
 import {Vanta} from "./components/Vanta";
 
-
 export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
-
 
 function App() {
     const dispatch = useAppDispatch()
@@ -26,38 +24,6 @@ function App() {
       dispatch(initializeAppTC())
     }, [])
 
-    //
-    // //tasks:
-    // const removeTask = useCallback((id: string, todolistId: string) => {
-    //     let action = deleteTaskTC(todolistId, id)
-    //     dispatch(action)
-    // },[dispatch])
-    // const addTask = useCallback((title: string, todolistId: string) => {
-    //     dispatch(addTaskTC(todolistId, title))
-    // },[dispatch])
-    // const changeTaskTitle = useCallback((id: string, newTitle: string, todolistId: string) => {
-    //     dispatch(updateTaskTC(todolistId, {title: newTitle}, id))
-    // }, [dispatch])
-    // const  changeStatus = useCallback((id: string, status: TaskStatus, todolistId: string) => {
-    //     dispatch(updateTaskTC(todolistId, {status},  id))
-    // }, [dispatch])
-    //
-    // //todolist:
-    // const changeFilter = useCallback((value: FilterValuesType, todolistId: string) => {
-    //     dispatch(changeTodolistFilterAC(value, todolistId))
-    // }, [dispatch])
-    // const removeTodolist = useCallback((id: string) => {
-    //     let action = deleteTodolistTC(id);
-    //     dispatch(action)
-    // }, [dispatch])
-    // function changeTodolistTitle(id: string, title: string) {
-    //     dispatch(changeTodolistTitleTC(title, id))
-    // }
-    // const addTodolist = useCallback((title: string) => {
-    //     let action = addTodolistTC(title)
-    //     dispatch(action)
-    // }, [dispatch])
-
     const onClickHandler = () => {
         dispatch(logoutTC())
     }
@@ -68,7 +34,6 @@ function App() {
             <CircularProgress/>
         </div>
     }
-
 
     return (
         <div className="App">

@@ -26,11 +26,11 @@ const theme = createTheme(
 ReactDOM.render(
     <ThemeProvider theme={theme}>
         <CssBaseline/>
-        <BrowserRouter>
+        <HashRouter>
             <Provider store={store}>
                 <App/>
             </Provider>
-        </BrowserRouter>
+        </HashRouter>
 
     </ThemeProvider>,
     document.getElementById('root'));

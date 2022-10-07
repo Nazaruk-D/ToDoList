@@ -6,16 +6,10 @@ import {Delete} from "@material-ui/icons";
 import {Task} from "./Task";
 import {FilterValuesType} from "./reducers/todolists-reducer";
 import {TaskStatus, TaskType} from "./api/todolist-api";
-import {useDispatch} from "react-redux";
 import {fetchTasks} from "./reducers/tasks-reducer";
 import {useAppDispatch} from "./reducers/store";
 import {RequestStatusType} from "./reducers/app-reducer";
 
-// export type TaskType = {
-//     id: string
-//     title: string
-//     isDone: boolean
-// }
 
 type PropsType = {
     id: string

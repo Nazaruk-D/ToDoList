@@ -40,6 +40,7 @@ export const fetchTodolistsThunk = (): AppThunk => (dispatch) => {  ///Пофи�
     dispatch(setAppStatusAC("loading"))
     todolistAPI.getTodolist()
         .then((res) => {
+            console.log(res.data)
             dispatch(fetchTodolistAC(res.data))
             dispatch(setAppStatusAC("succeeded"))
         }).catch((err: AxiosError) => {
