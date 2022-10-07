@@ -7,27 +7,31 @@ import {createTheme, CssBaseline, ThemeProvider} from "@material-ui/core";
 import {blue, cyan, red} from "@material-ui/core/colors";
 import {Provider} from "react-redux";
 import {store} from "./reducers/store";
+import {BrowserRouter, HashRouter} from "react-router-dom";
 
 const theme = createTheme(
     {
         palette: {
-            // primary: blue,a
+            // primary: blue,
             primary: {
-                main: "#fdsfdsf"
+                main: "#6b6a6a",
             },
             secondary: red,
             type: "light",
-
         },
+
     })
 
 
 ReactDOM.render(
     <ThemeProvider theme={theme}>
         <CssBaseline/>
-        <Provider store={store}>
-            <App/>
-        </Provider>
+        <BrowserRouter>
+            <Provider store={store}>
+                <App/>
+            </Provider>
+        </BrowserRouter>
+
     </ThemeProvider>,
     document.getElementById('root'));
 

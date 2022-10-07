@@ -40,6 +40,19 @@ export const taskAPI = {
     }
 }
 
+export const authAPI = {
+    login(data: LoginParamsType) {
+        return instance.post<LoginParamsType, AxiosResponse<ResponseType<{ userId: number }>>>(`auth/login`, data)
+    },
+    logout() {
+        return instance.delete<ResponseType>(`auth/login`)
+    },
+    me(){
+        return instance.get<ResponseType<MeType>>(`auth/me`)
+
+    }
+}
+
 
 //types
 export type TodolistType = {
@@ -79,6 +92,12 @@ export enum TaskPriority {
     Urgently = 3,
     Later = 4
 }
+export enum StatusCode {
+    OK = 0,
+    ERROR = 1,
+    CAPTCHA = 10,
+}
+
 type GetTasksResponse = {
     error: string | null
     totalCount: number
@@ -91,6 +110,17 @@ export type UpdateTaskModelType = {
     priority: TaskPriority
     startDate: string
     deadline: string
+}
+export type LoginParamsType = {
+    email: string
+    password: string
+    rememberMe: boolean
+    captcha?: boolean
+}
+export type MeType = {
+    id: number
+    email: string
+    login: string
 }
 
 

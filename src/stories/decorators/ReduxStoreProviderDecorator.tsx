@@ -7,12 +7,14 @@ import {todolistsreducer} from "../../reducers/todolists-reducer";
 import {v1} from "uuid";
 import {TaskPriority, TaskStatus} from "../../api/todolist-api";
 import {appReducer} from "../../reducers/app-reducer";
+import {authReducer} from "../../features/Login/auth-reducer";
 
 
 const rootReducer = combineReducers({
     tasks: tasksReducer,
     todolists: todolistsreducer,
-    app: appReducer
+    app: appReducer,
+    auth: authReducer
 })
 
 const initialGlobalState = {
@@ -24,9 +26,6 @@ const initialGlobalState = {
         ["todolistId1"]: [
             {id: v1(), title: "CSS", status: TaskStatus.Completed, todoListId: "todolistId1", startDate:"", deadline:"", addedDate:"", order:0, priority: TaskPriority.Low, description:""},
             {id: v1(), title: "HTML", status: TaskStatus.New, todoListId: "todolistId1", startDate:"", deadline:"", addedDate:"", order:0, priority: TaskPriority.Low, description:""},
-            //
-            // {id: v1(), title: "HTML&CSS", isDone: true},
-            // {id: v1(), title: "JS", isDone: false}
         ],
         ["todolistId2"]: [
             {id: v1(), title: "Milk", status: TaskStatus.Completed, todoListId: "todolistId2", startDate:"", deadline:"", addedDate:"", order:0, priority: TaskPriority.Low, description:""},
@@ -35,8 +34,12 @@ const initialGlobalState = {
     },
     app: {
         status: 'loading',
-        error: null
+        error: null,
+        initialized: false
 
+    },
+    auth: {
+        isLoggedIn: false
     }
 };
 

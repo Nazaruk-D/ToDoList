@@ -41,7 +41,7 @@ export const AddItemForm = React.memo ((props: AddItemFormPropsType) => {
             error={!!error}
             label={"Title"}
             helperText={!!error}
-            style = {{width: 196}}
+            style = {{width: 196, backgroundColor: "rgba(255, 255, 255, 0.5)"}}
         />
         <IconButton aria-label="delete" onClick={addItem}>
             <Add/>
@@ -50,4 +50,3 @@ export const AddItemForm = React.memo ((props: AddItemFormPropsType) => {
         {error && <div className="error-message">{error}</div>}
     </div>
 })
-/*style={{width:"270px"}}*/
