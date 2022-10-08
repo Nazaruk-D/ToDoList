@@ -26,25 +26,25 @@ type PropsType = {
     entityStatus: RequestStatusType
 }
 
-export const Todolist = React.memo ((props: PropsType) => {
+export const Todolist = React.memo((props: PropsType) => {
 
     const dispatch = useAppDispatch()
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(fetchTasks(props.id))
     }, [])
 
 
     const addTask = useCallback((title: string) => {
         props.addTask(title, props.id);
-    },[props.id, props.addTask])
+    }, [props.id, props.addTask])
 
     const removeTodolist = useCallback(() => {
         props.removeTodolist(props.id);
     }, [props.id])
     const changeTodolistTitle = useCallback((title: string) => {
         props.changeTodolistTitle(props.id, title);
-    },[props.changeTodolistTitle, props.id])
+    }, [props.changeTodolistTitle, props.id])
 
     const onAllClickHandler = useCallback(() => props.changeFilter("all", props.id), [props.changeFilter, props.id]);
     const onActiveClickHandler = useCallback(() => props.changeFilter("active", props.id), [props.changeFilter, props.id]);
@@ -63,8 +63,8 @@ export const Todolist = React.memo ((props: PropsType) => {
 
 
     return <div>
-        <h3><EditableSpan value={props.title} onChange={changeTodolistTitle} />
-            <IconButton aria-label="delete" onClick={removeTodolist} disabled={props.entityStatus === "loading"} >
+        <h3><EditableSpan value={props.title} onChange={changeTodolistTitle}/>
+            <IconButton aria-label="delete" onClick={removeTodolist} disabled={props.entityStatus === "loading"}>
                 <Delete/>
             </IconButton>
         </h3>
@@ -80,7 +80,8 @@ export const Todolist = React.memo ((props: PropsType) => {
                         props.changeTaskStatus(taskId, newTaskTitle, props.id);
                     }
 
-                    return <Task key={t.id} todolistId={props.id} task={t} removeTask={removeTask} changeTaskStatus={changeTaskStatus} changeTaskTitle={changeTaskTitle}/>
+                    return <Task key={t.id} todolistId={props.id} task={t} removeTask={removeTask}
+                                 changeTaskStatus={changeTaskStatus} changeTaskTitle={changeTaskTitle}/>
                 })
             }
         </List>

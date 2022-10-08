@@ -1,7 +1,7 @@
 
 .hire {
   position: relative;
-  height: 93vh;
+  min-height: 93vh;
   width: 100%;
   display: flex;
   align-items: center;
@@ -11,6 +11,8 @@
 .vanta {
   position: absolute;
   top: 0;
+  bottom:0;
+  left:0;
   right: 0.09%;
   width: 100%;
   height: 99.8%;

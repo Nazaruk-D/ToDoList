@@ -17,6 +17,7 @@ import {addTaskTC, deleteTaskTC, updateTaskTC} from "./reducers/tasks-reducer";
 import {TaskStatus} from "./api/todolist-api";
 import {TasksStateType} from "./App";
 import {Navigate} from "react-router-dom";
+import s from "./TodolistsList.module.css"
 
 
 export const TodolistsList = () => {
@@ -78,11 +79,11 @@ export const TodolistsList = () => {
             <Grid container style={{padding: "20px 0"} }>
                 <AddItemForm addItem={addTodolist}/>
             </Grid>
-            <Grid container spacing={4}>
+            <Grid container spacing={4} className={s.grid}>
                 {todolists.map(tl => {
                     return (
-                        <Grid item key={tl.id} xs={3} style={{height: "100%"}}>
-                            <Paper style={{padding: "20px", backgroundColor: "rgba(255, 255, 255, 0.5)"}} elevation={8} >
+                        <Grid item key={tl.id} xs={"auto"} style={{height: "100%"}} >
+                            <Paper  className={s.todolistContainer} style={{backgroundColor: "rgba(255, 255, 255, 0.5)"}} elevation={8} >
                                 <Todolist
                                     id={tl.id}
                                     title={tl.title}
@@ -96,6 +97,7 @@ export const TodolistsList = () => {
                                     changeTaskTitle={changeTaskTitle}
                                     changeTodolistTitle={changeTodolistTitle}
                                     entityStatus={tl.entityStatus}
+
                                 />
                             </Paper>
                         </Grid>)
