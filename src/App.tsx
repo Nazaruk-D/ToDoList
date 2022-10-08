@@ -38,7 +38,7 @@ function App() {
     return (
         <div className="App">
             <ErrorSnackbar/>
-            <AppBar position="static" style={{height:"7vh"}}>
+            <AppBar position="static" style={{height:"7vh", borderBottom:"1px solid #333333"}}>
                 <Toolbar style={{justifyContent: "space-between"}}>
                     <IconButton edge="start" color="inherit" aria-label="menu">
                         <Menu/>
