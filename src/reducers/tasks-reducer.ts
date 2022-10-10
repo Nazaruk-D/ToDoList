@@ -1,5 +1,5 @@
 import {TasksStateType} from "../App";
-import {AddTodolistAT, FetchTodosACType, RemoveTodolistAT} from "./todolists-reducer";
+import {AddTodolistAT, ClearTodosDataAT, FetchTodosACType, RemoveTodolistAT} from "./todolists-reducer";
 import {taskAPI, TaskPriority, TaskStatus, TaskType} from "../api/todolist-api";
 import {AppRootStateType, AppThunk} from "./store";
 import {SetAppErrorProps, setAppStatusAC} from "./app-reducer";
@@ -32,6 +32,8 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Tasks
             return stateCopy;
         case "SET-TASKS":
             return {...state, [action.todoId]: action.tasks}
+        case "CLEAR-DATA":
+            return {}
         default:
             return state
     }
@@ -135,6 +137,7 @@ export type TasksActionType =
     | FetchTodosACType
     | ReturnType<typeof setTasks>
     | SetAppErrorProps
+    | ClearTodosDataAT
 
 
 export type UpdateTaskType = {
