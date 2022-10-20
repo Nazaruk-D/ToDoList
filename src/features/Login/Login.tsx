@@ -10,7 +10,6 @@ import {
     TextField
 } from "@material-ui/core";
 import {useFormik} from "formik";
-import {useDispatch, useSelector} from "react-redux";
 import {loginTC} from "./auth-reducer";
 import {useAppDispatch, useAppSelector} from "../../reducers/store";
 import {Navigate} from "react-router-dom";

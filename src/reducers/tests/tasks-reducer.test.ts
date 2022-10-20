@@ -88,7 +88,8 @@ beforeEach(() => {
 
 test('correct task should be deleted from correct array', () => {
 
-    const action = removeTaskAC("todolistId2", "2");
+    const action = removeTaskAC({todolistId: "todolistId2",taskId: "2"})
+
 
     const endState = tasksReducer(startState, action)
 
@@ -177,7 +178,8 @@ test('correct task should be added to correct array', () => {
         description: ""
     }
 
-    const action = addTaskAC({...task, title: "juce"});
+    // const action = addTaskAC({...task, title: "juce"});
+    const action = addTaskAC({task: task});
 
     const endState = tasksReducer(startState, action)
 
@@ -204,7 +206,8 @@ test('status of specified task should be changed', () => {
     }
 
 
-    const action = updateTaskAC( "todolistId2", {...task, status: TaskStatus.New},"2");
+    const action = updateTaskAC(
+        {todolistId:  "todolistId2", task: {...task, status: TaskStatus.New}, taskId: "2"})
     const endState = tasksReducer(startState, action)
 
     expect(endState["todolistId1"][1].status).toBe(TaskStatus.Completed);
@@ -226,7 +229,7 @@ test('status of specified task should be changed', () => {
         priority: TaskPriority.Low,
         description: ""
     }
-    const action = updateTaskAC("todolistId2" , {...task, title: "Coca"}, "2");
+    const action = updateTaskAC({todolistId:"todolistId2", task: {...task, title: "Coca"}, taskId: "2"});
     const endState = tasksReducer(startState, action)
 
     expect(endState["todolistId2"][1].title).toBe("Coca");
@@ -239,7 +242,7 @@ test('new array should be added when new todolist is added', () => {
     let newTodolist = {
         id: "3", title: "new todolist", filter: "all", addedDate:"", order:0, entityStatus: "idle"
     }
-    const action = addTodolistAC(newTodolist);
+    const action = addTodolistAC({todolist: newTodolist});
     const endState = tasksReducer(startState, action)
 
 
@@ -256,7 +259,7 @@ test('new array should be added when new todolist is added', () => {
 
 test('property with todolistId should be deleted', () => {
 
-    const action = removeTodolistAC("todolistId2");
+    const action = removeTodolistAC({id: "todolistId2"});
     const endState = tasksReducer(startState, action)
 
     const keys = Object.keys(endState);

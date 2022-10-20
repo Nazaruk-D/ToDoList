@@ -10,7 +10,7 @@ test('ids should be equals', () => {
         id: "new", title: "new todolist", filter: "all", addedDate:"", order:0, entityStatus: "idle"
     }
 
-    const action = addTodolistAC(newTodolist);
+    const action = addTodolistAC({todolist: newTodolist});
 
     const endTasksState = tasksReducer(startTasksState, action)
     const endTodolistsState = todolistsreducer(startTodolistsState, action)

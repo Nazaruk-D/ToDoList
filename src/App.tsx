@@ -46,11 +46,11 @@ function App() {
                     <Typography variant="h6">
                         Todolists
                     </Typography>
-                    {isLoggedIn &&  <Button color="inherit" variant={"outlined"} onClick={onClickHandler}>Logout</Button>}
+                    {isLoggedIn && <Button color="inherit" variant={"outlined"} onClick={onClickHandler}>Logout</Button>}
                 </Toolbar>
                 {status === "loading" &&  <LinearProgress color="secondary" />}
             </AppBar>
-            <Vanta/>
+                <Vanta/>
         </div>
     );
 }
