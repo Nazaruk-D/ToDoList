@@ -3,17 +3,18 @@ import React, {useEffect, useRef, useState} from 'react'
 import BIRDS from 'vanta/dist/vanta.cells.min'
 // @ts-ignore
 import * as THREE from 'three'
-import s from './Vanta.module.css'
+import s from './BodyApp.module.css'
 import {Container} from "@material-ui/core";
 import {Navigate, Route, Routes} from "react-router-dom";
-import {TodolistsList} from "../TodolistsList";
-import {Login} from "../features/Login/Login";
-import Page404 from "./Page404";
+import {TodoLists} from "../../features/TodoLists/TodoLists";
+import {Login} from "../../features/Login/Login";
+import Page404 from "../../components/Page404/Page404";
 
-export const Vanta = () => {
+export const BodyApp = () => {
 
     const [vantaEffect, setVantaEffect] = useState<any>(0)
     const myRef = useRef(null)
+
     useEffect(() => {
         if (!vantaEffect) {
             setVantaEffect(BIRDS({
@@ -34,16 +35,31 @@ export const Vanta = () => {
         }
     }, [vantaEffect])
 
-    return <div className={s.hire}>
-        <div ref={myRef} className={s.vanta}>
-            <Container maxWidth={"lg"} >
+    return <div className={s.body}>
+        <div ref={myRef} className={s.vanta}></div>
+            <Container maxWidth={"xl"} className={s.mainBlock } style={{justifyContent: "center", zIndex:10, paddingTop: "10vh"}}>
                 <Routes>
-                    <Route path="/" element={<TodolistsList/>}/>
+                    <Route path="/" element={<TodoLists/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/404" element={<Page404/>}/>
                     <Route path="*" element={<Navigate to="/404"/>}/>
                 </Routes>
             </Container>
-        </div>
     </div>
 }
+
+
+
+
+// <div className={s.body}>
+//     <div ref={myRef} className={s.vanta} >
+//         <Container maxWidth={"lg"} >
+//             <Routes>
+//                 <Route path="/" element={<TodoLists/>}/>
+//                 <Route path="/login" element={<Login/>}/>
+//                 <Route path="/404" element={<Page404/>}/>
+//                 <Route path="*" element={<Navigate to="/404"/>}/>
+//             </Routes>
+//         </Container>
+//     </div>
+// </div>

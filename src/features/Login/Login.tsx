@@ -46,7 +46,6 @@ export const Login = () => {
             return errors
         },
         onSubmit: values => {
-            // alert(JSON.stringify(values));
             dispatch(loginTC(values))
             formik.resetForm()
         },
@@ -57,7 +56,6 @@ export const Login = () => {
     }
 
     return <Grid container justifyContent={'center'} style={{marginTop: "150px"}}>
-        <Grid item justifyContent={'center'}>
             <form onSubmit={formik.handleSubmit}>
                 <FormControl>
                     <FormLabel>
@@ -74,10 +72,6 @@ export const Login = () => {
                         <TextField
                             label="Email"
                             margin="normal"
-                            // name={"email"}
-                            // onChange={formik.handleChange}
-                            // value={formik.values.email}
-                            // onBlur={formik.handleBlur}
                             {...formik.getFieldProps('email')}
                         />
                         { formik.touched.email && formik.errors.email && <div style={{color:"red"}}>{formik.errors.email}</div>}
@@ -85,17 +79,11 @@ export const Login = () => {
                             type="password"
                             label="Password"
                             margin="normal"
-                            // name={"password"}
-                            // onChange={formik.handleChange}
-                            // value={formik.values.password}
-                            // onBlur={formik.handleBlur}
+                            autoComplete={"on"}
                             {...formik.getFieldProps('password')}
                         />
                         { formik.touched.password && formik.errors.password && <div style={{color:"red"}}>{formik.errors.password}</div>}
                         <FormControlLabel label={'Remember me'} control={<Checkbox
-                            // name={"rememberMe"}
-                            // onChange={formik.handleChange}
-                            // checked={formik.values.rememberMe}
                             {...formik.getFieldProps('rememberMe')}
                             checked={formik.values.rememberMe}
                         />}/>
@@ -105,6 +93,5 @@ export const Login = () => {
                     </FormGroup>
                 </FormControl>
             </form>
-        </Grid>
     </Grid>
 }

@@ -1,11 +1,8 @@
-import {TasksStateType} from "../App";
+import {TasksStateType} from "../App/App";
 import {
     addTodolistAC,
-    AddTodolistAT,
-    ClearTodosDataAT, fetchTodolistAC,
-    FetchTodosACType,
+    fetchTodolistAC,
     removeTodolistAC,
-    RemoveTodolistAT
 } from "./todolists-reducer";
 import {taskAPI, TaskPriority, TaskStatus, TaskType} from "../api/todolist-api";
 import {AppRootStateType, AppThunk} from "./store";
@@ -180,16 +177,16 @@ export const updateTaskTC = (todoId: string, domainModel: UpdateTaskType, taskId
 //types
 
 
-export type TasksActionType =
-    ReturnType<typeof removeTaskAC>
-    | ReturnType<typeof addTaskAC>
-    | ReturnType<typeof updateTaskAC>
-    | AddTodolistAT
-    | RemoveTodolistAT
-    | FetchTodosACType
-    | ReturnType<typeof setTasks>
-    // | SetAppErrorProps
-    | ClearTodosDataAT
+// export type TasksActionType =
+//     ReturnType<typeof removeTaskAC>
+//     | ReturnType<typeof addTaskAC>
+//     | ReturnType<typeof updateTaskAC>
+//     | AddTodolistAT
+//     | RemoveTodolistAT
+//     | FetchTodosACType
+//     | ReturnType<typeof setTasks>
+//     // | SetAppErrorProps
+//     | ClearTodosDataAT
 
 
 export type UpdateTaskType = {

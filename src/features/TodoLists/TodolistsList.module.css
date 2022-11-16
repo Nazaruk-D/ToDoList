@@ -1,7 +1,10 @@
+.td {
+}
 
 .grid {
     display: flex;
-    justify-content: start;
+    justify-content: center;
+
 }
 
 .todolistContainer {

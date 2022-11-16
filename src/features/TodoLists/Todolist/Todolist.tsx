@@ -1,14 +1,14 @@
-import React, {useCallback, useEffect} from 'react';
-import {AddItemForm} from './components/AddItemForm';
-import {EditableSpan} from './components/EditableSpan';
+import React, {useCallback} from 'react';
+import {AddItemForm} from '../../../components/AddItemForm/AddItemForm';
+import {EditableSpan} from '../../../components/EditableSpan/EditableSpan';
 import {Button, IconButton, List} from "@material-ui/core";
 import {Delete} from "@material-ui/icons";
-import {Task} from "./Task";
-import {FilterValuesType} from "./reducers/todolists-reducer";
-import {TaskStatus, TaskType} from "./api/todolist-api";
-import {fetchTasks} from "./reducers/tasks-reducer";
-import {useAppDispatch} from "./reducers/store";
-import {RequestStatusType} from "./reducers/app-reducer";
+import {Task} from "./Task/Task";
+import {FilterValuesType} from "../../../reducers/todolists-reducer";
+import {TaskStatus, TaskType} from "../../../api/todolist-api";
+import {useAppDispatch} from "../../../reducers/store";
+import {RequestStatusType} from "../../../reducers/app-reducer";
+import {useNavigate} from "react-router-dom";
 
 
 type PropsType = {
@@ -28,12 +28,12 @@ type PropsType = {
 
 export const Todolist = React.memo((props: PropsType) => {
 
-    const dispatch = useAppDispatch()
-
+    // const dispatch = useAppDispatch()
     // useEffect(() => {
     //     dispatch(fetchTasks(props.id))
     // }, [])
 
+    const navigate = useNavigate()
 
     const addTask = useCallback((title: string) => {
         props.addTask(title, props.id);
@@ -50,7 +50,6 @@ export const Todolist = React.memo((props: PropsType) => {
     const onActiveClickHandler = useCallback(() => props.changeFilter("active", props.id), [props.changeFilter, props.id]);
     const onCompletedClickHandler = useCallback(() => props.changeFilter("completed", props.id), [props.changeFilter, props.id]);
 
-
     let tasks = props.tasks;
     let tasksForTodolist = tasks;
 
@@ -60,7 +59,6 @@ export const Todolist = React.memo((props: PropsType) => {
     if (props.filter === "completed") {
         tasksForTodolist = tasks.filter(t => t.status === TaskStatus.Completed);
     }
-
 
     return <div>
         <h3><EditableSpan value={props.title} onChange={changeTodolistTitle}/>

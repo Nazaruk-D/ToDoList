@@ -1,4 +1,4 @@
-import {TasksStateType} from "../../App";
+import {TasksStateType} from "../../App/App";
 import {addTodolistAC, removeTodolistAC} from "../todolists-reducer";
 import {addTaskAC, removeTaskAC, tasksReducer, updateTaskAC} from "../tasks-reducer";
 import {TaskPriority, TaskStatus, TaskType} from "../../api/todolist-api";
@@ -179,14 +179,14 @@ test('correct task should be added to correct array', () => {
     }
 
     // const action = addTaskAC({...task, title: "juce"});
-    const action = addTaskAC({task: task});
+    const action = addTaskAC({task});
 
     const endState = tasksReducer(startState, action)
 
     expect(endState["todolistId1"].length).toBe(3);
     expect(endState["todolistId2"].length).toBe(4);
     expect(endState["todolistId2"][0].id).toBeDefined();
-    expect(endState["todolistId2"][0].title).toBe("juce");
+    expect(endState["todolistId2"][0].title).toBe("CSS");
     expect(endState["todolistId2"][0].status).toBe(TaskStatus.New);
 })
 

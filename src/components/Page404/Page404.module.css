@@ -1,0 +1,11 @@
+.page404Container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+}
+
+.page404Block {
+    height: 60vh;
+    cursor: pointer;
+}

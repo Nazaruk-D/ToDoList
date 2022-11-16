@@ -1,4 +1,4 @@
-import {TasksActionType, tasksReducer} from './tasks-reducer';
+import {tasksReducer} from './tasks-reducer';
 import {todolistsreducer} from './todolists-reducer';
 import {combineReducers, legacy_createStore, applyMiddleware, AnyAction} from 'redux';
 import thunk, {ThunkAction, ThunkDispatch} from 'redux-thunk'

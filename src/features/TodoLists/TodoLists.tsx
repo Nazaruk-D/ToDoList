@@ -1,9 +1,9 @@
 import React, {useCallback, useEffect} from 'react';
 import {Grid, Paper} from "@material-ui/core";
-import {AddItemForm} from "./components/AddItemForm";
-import {Todolist} from "./Todolist";
+import {AddItemForm} from "../../components/AddItemForm/AddItemForm";
+import {Todolist} from "./Todolist/Todolist";
 import {useSelector} from "react-redux";
-import {AppRootStateType, useAppDispatch, useAppSelector} from "./reducers/store";
+import {AppRootStateType, useAppDispatch, useAppSelector} from "../../reducers/store";
 import {
     addTodolistTC,
     changeTodolistFilterAC,
@@ -12,29 +12,44 @@ import {
     fetchTodolistsThunk,
     FilterValuesType,
     TodolistDomainType
-} from "./reducers/todolists-reducer";
-import {addTaskTC, deleteTaskTC, updateTaskTC} from "./reducers/tasks-reducer";
-import {TaskStatus} from "./api/todolist-api";
-import {TasksStateType} from "./App";
+} from "../../reducers/todolists-reducer";
+import {addTaskTC, deleteTaskTC, updateTaskTC} from "../../reducers/tasks-reducer";
+import {TaskStatus} from "../../api/todolist-api";
+import {TasksStateType} from "../../App/App";
 import {Navigate} from "react-router-dom";
 import s from "./TodolistsList.module.css"
 
 
-export const TodolistsList = () => {
+export const TodoLists = () => {
 
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
-    let todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
+    let todoLists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
     let tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
-
 
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        if(!isLoggedIn){
+        if (!isLoggedIn) {
             return
         }
         dispatch(fetchTodolistsThunk())
     }, [])
+
+    //todolist:
+    const changeFilter = useCallback((value: FilterValuesType, todolistId: string) => {
+        dispatch(changeTodolistFilterAC({filter: value, id: todolistId}))
+    }, [dispatch])
+    const removeTodolist = useCallback((id: string) => {
+        let action = deleteTodolistTC(id);
+        dispatch(action)
+    }, [dispatch])
+    function changeTodolistTitle(id: string, title: string) {
+        dispatch(changeTodolistTitleTC(title, id))
+    }
+    const addTodolist = useCallback((title: string) => {
+        let action = addTodolistTC(title)
+        dispatch(action)
+    }, [dispatch])
 
     //tasks:
     const removeTask = useCallback((id: string, todolistId: string) => {
@@ -51,39 +66,21 @@ export const TodolistsList = () => {
         dispatch(updateTaskTC(todolistId, {status}, id))
     }, [dispatch])
 
-    //todolist:
-    const changeFilter = useCallback((value: FilterValuesType, todolistId: string) => {
-        dispatch(changeTodolistFilterAC({filter: value,id: todolistId}))
-    }, [dispatch])
-    const removeTodolist = useCallback((id: string) => {
-        let action = deleteTodolistTC(id);
-        dispatch(action)
-    }, [dispatch])
-
-    function changeTodolistTitle(id: string, title: string) {
-        dispatch(changeTodolistTitleTC(title, id))
-    }
-
-    const addTodolist = useCallback((title: string) => {
-        let action = addTodolistTC(title)
-        dispatch(action)
-    }, [dispatch])
-
-
     if (!isLoggedIn) {
         return <Navigate to={"/login"}/>
     }
 
     return (
-        <div>
-            <Grid container style={{padding: "20px 0"} }>
+        <div className={s.td}>
+            <Grid container style={{padding: "20px 0"}} >
                 <AddItemForm addItem={addTodolist}/>
             </Grid>
             <Grid container spacing={4} className={s.grid}>
-                {todolists.map(tl => {
+                {todoLists.map(tl => {
                     return (
-                        <Grid item key={tl.id} xs={"auto"} style={{height: "100%"}} >
-                            <Paper  className={s.todolistContainer} style={{backgroundColor: "rgba(255, 255, 255, 0.5)"}} elevation={8} >
+                        <Grid item key={tl.id} xs={"auto"} style={{height: "100%", justifyContent: "center"}}>
+                            <Paper className={s.todolistContainer} style={{backgroundColor: "rgba(255, 255, 255, 0.5)"}}
+                                   elevation={8}>
                                 <Todolist
                                     id={tl.id}
                                     title={tl.title}
@@ -97,7 +94,6 @@ export const TodolistsList = () => {
                                     changeTaskTitle={changeTaskTitle}
                                     changeTodolistTitle={changeTodolistTitle}
                                     entityStatus={tl.entityStatus}
-
                                 />
                             </Paper>
                         </Grid>)
