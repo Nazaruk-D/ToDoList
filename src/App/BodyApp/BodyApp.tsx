@@ -37,7 +37,7 @@ export const BodyApp = () => {
 
     return <div className={s.body}>
         <div ref={myRef} className={s.vanta}></div>
-            <Container maxWidth={"xl"} className={s.mainBlock } style={{justifyContent: "center", zIndex:10, paddingTop: "10vh"}}>
+            <Container maxWidth={"lg"} className={s.mainBlock } style={{justifyContent: "center", zIndex:10, paddingTop: "10vh"}}>
                 <Routes>
                     <Route path="/" element={<TodoLists/>}/>
                     <Route path="/login" element={<Login/>}/>
