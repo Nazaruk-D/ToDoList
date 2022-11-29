@@ -19,7 +19,8 @@ const HeaderApp = () => {
     return (
         <AppBar position="static" style={{height: "7vh", borderBottom: "1px solid #333333", position: "fixed"}}>
             <Toolbar style={{justifyContent: "space-between"}}>
-                <IconButton edge="start" color="inherit" aria-label="menu" onClick={() => setMenu(!menu)} className={s.burgerMenuBlock}>
+                <IconButton edge="start" color="inherit" aria-label="menu" onClick={() => setMenu(!menu)}
+                            className={s.burgerMenuBlock}>
                     <Menu/>
 
                 </IconButton>
@@ -38,8 +39,7 @@ const HeaderApp = () => {
                 status === "loading" && <LinearProgress color="secondary"/>
             }
         </AppBar>
-    )
-        ;
+    );
 };
 
 export default HeaderApp;
