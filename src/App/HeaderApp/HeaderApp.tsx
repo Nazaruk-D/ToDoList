@@ -18,16 +18,15 @@ const HeaderApp = () => {
     }
     return (
         <AppBar position="static" style={{height: "7vh", borderBottom: "1px solid #333333", position: "fixed"}}>
-            <Toolbar style={{justifyContent: "space-between"}}>
+            <Toolbar style={{minHeight: "7vh", justifyContent: "space-between"}}>
                 <IconButton edge="start" color="inherit" aria-label="menu" onClick={() => setMenu(!menu)}
                             className={s.burgerMenuBlock}>
                     <Menu/>
-
                 </IconButton>
                 {menu &&
                     <div className={s.burgerMenu}>
                         <a href="https://nazaruk-d.github.io/Portfolio/#" className={s.row}>Portfolio</a>
-                        <a href="https://nazaruk-d.github.io/Samurai-way/#/" className={s.row}>Social Network</a>
+                        <a href="https://nazaruk-d.github.io/Social-network/#" className={s.row}>Social Network</a>
                         <a href="https://nazaruk-d.github.io/FridayProject/" className={s.row}>Education Cards</a>
                     </div>}
                 <Typography variant="h6">
