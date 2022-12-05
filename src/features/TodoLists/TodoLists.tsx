@@ -13,7 +13,7 @@ import {
     FilterValuesType,
     TodolistDomainType
 } from "../../reducers/todolists-reducer";
-import {addTaskTC, deleteTaskTC, updateTaskTC} from "../../reducers/tasks-reducer";
+import {addTaskTC, removeTaskTC, updateTaskTC} from "../../reducers/tasks-reducer";
 import {TaskStatus} from "../../api/todolist-api";
 import {TasksStateType} from "../../App/App";
 import {Navigate} from "react-router-dom";
@@ -52,9 +52,8 @@ export const TodoLists = () => {
     }, [dispatch])
 
     //tasks:
-    const removeTask = useCallback((id: string, todolistId: string) => {
-        let action = deleteTaskTC(todolistId, id)
-        dispatch(action)
+    const removeTask = useCallback((taskId: string, todoId: string) => {
+        dispatch(removeTaskTC({taskId, todoId}))
     }, [dispatch])
     const addTask = useCallback((title: string, todolistId: string) => {
         dispatch(addTaskTC(todolistId, title))

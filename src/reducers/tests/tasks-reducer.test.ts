@@ -1,6 +1,6 @@
 import {TasksStateType} from "../../App/App";
 import {addTodolistAC, removeTodolistAC} from "../todolists-reducer";
-import {addTaskAC, removeTaskAC, tasksReducer, updateTaskAC} from "../tasks-reducer";
+import {addTaskAC, removeTaskTC, tasksReducer, updateTaskAC} from "../tasks-reducer";
 import {TaskPriority, TaskStatus, TaskType} from "../../api/todolist-api";
 
 let startState: TasksStateType
@@ -88,7 +88,8 @@ beforeEach(() => {
 
 test('correct task should be deleted from correct array', () => {
 
-    const action = removeTaskAC({todolistId: "todolistId2",taskId: "2"})
+    let param = {todolistId: "todolistId2", taskId: "2"};
+    const action = removeTaskTC.fulfilled(param, "requestId", {todoId: "todolistId2", taskId: "2"})
 
 
     const endState = tasksReducer(startState, action)
@@ -207,7 +208,7 @@ test('status of specified task should be changed', () => {
 
 
     const action = updateTaskAC(
-        {todolistId:  "todolistId2", task: {...task, status: TaskStatus.New}, taskId: "2"})
+        {todolistId: "todolistId2", task: {...task, status: TaskStatus.New}, taskId: "2"})
     const endState = tasksReducer(startState, action)
 
     expect(endState["todolistId1"][1].status).toBe(TaskStatus.Completed);
@@ -229,7 +230,7 @@ test('status of specified task should be changed', () => {
         priority: TaskPriority.Low,
         description: ""
     }
-    const action = updateTaskAC({todolistId:"todolistId2", task: {...task, title: "Coca"}, taskId: "2"});
+    const action = updateTaskAC({todolistId: "todolistId2", task: {...task, title: "Coca"}, taskId: "2"});
     const endState = tasksReducer(startState, action)
 
     expect(endState["todolistId2"][1].title).toBe("Coca");
@@ -240,7 +241,7 @@ test('status of specified task should be changed', () => {
 test('new array should be added when new todolist is added', () => {
 
     let newTodolist = {
-        id: "3", title: "new todolist", filter: "all", addedDate:"", order:0, entityStatus: "idle"
+        id: "3", title: "new todolist", filter: "all", addedDate: "", order: 0, entityStatus: "idle"
     }
     const action = addTodolistAC({todolist: newTodolist});
     const endState = tasksReducer(startState, action)
