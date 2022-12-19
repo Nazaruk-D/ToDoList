@@ -1,6 +1,6 @@
 import {TasksStateType} from "../../App/App";
 import {tasksReducer} from "../tasks-reducer";
-import {addTodolistAC, TodolistDomainType, todolistsreducer} from "../todolists-reducer";
+import {addTodolistTC, TodolistDomainType, todolistsreducer} from "../todolists-reducer";
 
 test('ids should be equals', () => {
     const startTasksState: TasksStateType = {};
@@ -10,7 +10,7 @@ test('ids should be equals', () => {
         id: "new", title: "new todolist", filter: "all", addedDate:"", order:0, entityStatus: "idle"
     }
 
-    const action = addTodolistAC({todolist: newTodolist});
+    const action = addTodolistTC.fulfilled({todolist: newTodolist}, "requestId", newTodolist.title);
 
     const endTasksState = tasksReducer(startTasksState, action)
     const endTodolistsState = todolistsreducer(startTodolistsState, action)

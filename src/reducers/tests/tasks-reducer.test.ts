@@ -1,5 +1,5 @@
 import {TasksStateType} from "../../App/App";
-import {addTodolistAC, removeTodolistAC} from "../todolists-reducer";
+import {addTodolistTC, deleteTodolistTC} from "../todolists-reducer";
 import {addTaskTC, removeTaskTC, tasksReducer, updateTaskTC} from "../tasks-reducer";
 import {TaskPriority, TaskStatus, TaskType} from "../../api/todolist-api";
 
@@ -165,7 +165,6 @@ test('correct task should be deleted from correct array', () => {
 
 test('correct task should be added to correct array', () => {
 
-    // const action = addTaskAC("juce", "todolistId2");
     const task: TaskType = {
         id: "1",
         title: "CSS",
@@ -178,9 +177,6 @@ test('correct task should be added to correct array', () => {
         priority: TaskPriority.Low,
         description: ""
     }
-
-    // const action = addTaskAC({...task, title: "juce"});
-    // const action = addTaskTC({todoId: "todolistId2", title: "CSS"});
 
     let param = {todoId: "todolistId2", title: "CSS"};
     const action = addTaskTC.fulfilled(task, "requestId", param)
@@ -247,7 +243,7 @@ test('new array should be added when new todolist is added', () => {
     let newTodolist = {
         id: "3", title: "new todolist", filter: "all", addedDate: "", order: 0, entityStatus: "idle"
     }
-    const action = addTodolistAC({todolist: newTodolist});
+    const action = addTodolistTC.fulfilled({todolist: newTodolist}, "requestId", newTodolist.title);
     const endState = tasksReducer(startState, action)
 
 
@@ -264,7 +260,7 @@ test('new array should be added when new todolist is added', () => {
 
 test('property with todolistId should be deleted', () => {
 
-    const action = removeTodolistAC({id: "todolistId2"});
+    const action = deleteTodolistTC.fulfilled({id: "todolistId2"}, "requestId", "todolistId2");
     const endState = tasksReducer(startState, action)
 
     const keys = Object.keys(endState);

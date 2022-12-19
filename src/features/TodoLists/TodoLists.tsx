@@ -44,7 +44,7 @@ export const TodoLists = () => {
     }, [dispatch])
 
     function changeTodolistTitle(id: string, title: string) {
-        dispatch(changeTodolistTitleTC(title, id))
+        dispatch(changeTodolistTitleTC({title, id}))
     }
 
     const addTodolist = useCallback((title: string) => {
