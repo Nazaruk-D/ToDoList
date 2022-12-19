@@ -6,6 +6,7 @@ ___
 This app is a todolist simulator.<br/>
 You can set global tasks and break them down into smaller subtasks.<br/>
 Todolist project made on functional components using hooks. <br/>
+Demo: https://nazaruk-d.github.io/ToDoList <br/>
 
 <img width="800px" src="./src/common/assets/png/Todolist.png">
 
