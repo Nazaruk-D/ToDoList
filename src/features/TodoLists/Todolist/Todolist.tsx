@@ -6,9 +6,7 @@ import {Delete} from "@material-ui/icons";
 import {Task} from "./Task/Task";
 import {FilterValuesType} from "../../../reducers/todolists-reducer";
 import {TaskStatus, TaskType} from "../../../api/todolist-api";
-import {useAppDispatch} from "../../../reducers/store";
 import {RequestStatusType} from "../../../reducers/app-reducer";
-import {useNavigate} from "react-router-dom";
 
 
 type PropsType = {
@@ -27,13 +25,6 @@ type PropsType = {
 }
 
 export const Todolist = React.memo((props: PropsType) => {
-
-    // const dispatch = useAppDispatch()
-    // useEffect(() => {
-    //     dispatch(fetchTasks(props.id))
-    // }, [])
-
-    const navigate = useNavigate()
 
     const addTask = useCallback((title: string) => {
         props.addTask(title, props.id);

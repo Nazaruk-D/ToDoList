@@ -19,7 +19,6 @@ import {TasksStateType} from "../../App/App";
 import {Navigate} from "react-router-dom";
 import s from "./TodolistsList.module.css"
 
-
 export const TodoLists = () => {
 
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
@@ -43,9 +42,11 @@ export const TodoLists = () => {
         let action = deleteTodolistTC(id);
         dispatch(action)
     }, [dispatch])
+
     function changeTodolistTitle(id: string, title: string) {
         dispatch(changeTodolistTitleTC(title, id))
     }
+
     const addTodolist = useCallback((title: string) => {
         let action = addTodolistTC(title)
         dispatch(action)
@@ -55,14 +56,14 @@ export const TodoLists = () => {
     const removeTask = useCallback((taskId: string, todoId: string) => {
         dispatch(removeTaskTC({taskId, todoId}))
     }, [dispatch])
-    const addTask = useCallback((title: string, todolistId: string) => {
-        dispatch(addTaskTC(todolistId, title))
+    const addTask = useCallback((title: string, todoId: string) => {
+        dispatch(addTaskTC({todoId, title}))
     }, [dispatch])
-    const changeTaskTitle = useCallback((id: string, newTitle: string, todolistId: string) => {
-        dispatch(updateTaskTC(todolistId, {title: newTitle}, id))
+    const changeTaskTitle = useCallback((taskId: string, newTitle: string, todoId: string) => {
+        dispatch(updateTaskTC({todoId, domainModel: {title: newTitle}, taskId}))
     }, [dispatch])
-    const changeStatus = useCallback((id: string, status: TaskStatus, todolistId: string) => {
-        dispatch(updateTaskTC(todolistId, {status}, id))
+    const changeStatus = useCallback((taskId: string, status: TaskStatus, todoId: string) => {
+        dispatch(updateTaskTC({todoId, domainModel: {status}, taskId}))
     }, [dispatch])
 
     if (!isLoggedIn) {
@@ -71,7 +72,7 @@ export const TodoLists = () => {
 
     return (
         <div className={s.td}>
-            <Grid container style={{padding: "20px 0"}} >
+            <Grid container style={{padding: "20px 0"}}>
                 <AddItemForm addItem={addTodolist}/>
             </Grid>
             <Grid container spacing={4} className={s.grid}>
