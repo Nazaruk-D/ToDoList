@@ -11,11 +11,13 @@ const HeaderApp = () => {
     const dispatch = useAppDispatch()
     const isLoggedIn = useSelector<AppRootStateType, boolean>(store => store.auth.isLoggedIn)
     const status = useSelector<AppRootStateType, RequestStatusType>(store => store.app.status)
+
     const [menu, setMenu] = useState(false)
-    console.log(menu)
+
     const onClickHandler = () => {
         dispatch(logoutTC())
     }
+
     return (
         <AppBar position="static" style={{height: "7vh", borderBottom: "1px solid #333333", position: "fixed"}}>
             <Toolbar style={{minHeight: "7vh", justifyContent: "space-between"}}>
@@ -27,7 +29,7 @@ const HeaderApp = () => {
                     <div className={s.burgerMenu}>
                         <a href="https://nazaruk-d.github.io/Portfolio/#" className={s.row}>Portfolio</a>
                         <a href="https://nazaruk-d.github.io/Social-network/#" className={s.row}>Social Network</a>
-                        <a href="https://nazaruk-d.github.io/FridayProject/" className={s.row}>Education Cards</a>
+                        <a href="https://nazaruk-d.github.io/EducationCards/" className={s.row}>Education Cards</a>
                     </div>}
                 <Typography variant="h6">
                     Todolists
